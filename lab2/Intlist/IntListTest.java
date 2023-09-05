@@ -22,9 +22,9 @@ public class IntListTest {
 
     @Test
     public void testdSquareList() {
-        IntList L = IntList.of(1, 2, 3);
-        IntList.dSquareList(L);
-        assertEquals(IntList.of(1, 4, 9), L);
+        IntList t = IntList.of(1, 2, 3);
+        IntList.dSquareList(t);
+        assertEquals(IntList.of(1, 4, 9), t);
     }
 
     /**
