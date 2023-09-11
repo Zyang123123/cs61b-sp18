@@ -1,68 +1,65 @@
-public class ArrayDeque<Item> {
-    private Item[] items;
+public class ArrayDeque<T> {
+    private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
 
     /** Creates an empty list. */
     public ArrayDeque() {
-        items = (Item[]) new Object[8];
+        items = (T[]) new Object[8];
         size = 0;
-        nextFirst=4;
-        nextLast=5;
+        nextFirst = 4;
+        nextLast = 5;
     }
 
     /** Resizes the underlying array to the target capacity. */
     private void resize(int capacity) {
-        Item[] a = (Item[]) new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
         int i;
-        for (i=0;i<size;i+=1){
-            if (nextFirst+1+i<=size-1){
-                a[i]=items[nextFirst+1+i];
-            }
-            else{
-                a[i]=items[nextFirst+1+i-size];
+        for (i = 0; i < size; i += 1) {
+            if (nextFirst + 1 + i <= size - 1) {
+                a[i] = items[nextFirst + 1 + i];
+            } else {
+                a[i] = items[nextFirst + 1 + i - size];
             }
         }
         //System.arraycopy(items, 0, a, 0, size);
         items = a;
-        nextFirst=capacity-1;
-        nextLast=size;
+        nextFirst = capacity-1;
+        nextLast = size;
     }
 
-    /** Inserts X into the back of the list. */
-    public void addLast(Item x) {
+    /** Inseritems X into the back of the list. */
+    public void addLast(T x) {
         if (size == items.length) {
             resize(size * 2);
         }
-        if (nextLast==items.length-1){
+        if (nextLast == items.length-1){
             items[nextLast] = x;
-            nextLast=0;
-        }
-        else {
+            nextLast = 0;
+        } else {
             items[nextLast] = x;
             nextLast += 1;
         }
         size = size + 1;
     }
 
-    public void addFirst(Item x) {
+    public void addFirst(T x) {
         if (size == items.length) {
             resize(size * 2);
         }
-        if (nextFirst==0){
+        if (nextFirst == 0) {
             items[nextFirst] = x;
-            nextFirst=items.length-1;
-        }
-        else {
+            nextFirst = items.length-1;
+        } else {
             items[nextFirst] = x;
             nextFirst -= 1;
         }
         size = size + 1;
     }
 
-    public boolean isEmpty(){
-        return size==0;
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     /** Returns the number of items in the list. */
@@ -70,54 +67,70 @@ public class ArrayDeque<Item> {
         return size;
     }
 
-    public void printDeque(){
+    public void printDeque() {
         int i;
-        for (i=0;i<size;i+=1){
-            if (nextFirst+1+i<= items.length-1){
+        for (i = 0; i < size; i += 1) {
+            if (nextFirst + 1 + i <= items.length - 1) {
                 System.out.print(items[nextFirst+1+i] + " ");
-            }
-            else{
-                System.out.print(items[nextFirst+1+i- items.length] + " ");
+            } else {
+                System.out.print(items[nextFirst + 1 + i - items.length] + " ");
             }
         }
         System.out.println();
     }
 
-    public Item removeFirst(){
-        nextFirst+=1;
-        Item T=items[nextFirst];
-        items[nextFirst]=null;
-        size-=1;
+    public T removeFirst() {
+        nextFirst += 1;
+        if (nextFirst > items.length - 1) {
+            nextFirst = nextFirst - items.length;
+        }
+        T T = items[nextFirst];
+        items[nextFirst] = null;
+        size -= 1;
+        if (size < 0) {
+            size = 0;
+        }
+        if (items.length >= 16 && size < items.length / 4) {
+            resize(items.length / 4);
+        }
         return T;
     }
 
-    /** Deletes item from back of the list and
-     * returns deleted item. */
-    public Item removeLast() {
-        nextLast-=1;
-        Item T=items[nextLast];
-        items[nextLast]=null;
-        size-=1;
+    /** Deletes T from back of the list and
+     * returns deleted T. */
+    public T removeLast() {
+        nextLast -= 1;
+        if (nextLast < 0) {
+            nextLast = nextLast + items.length;
+        }
+        T T = items[nextLast];
+        items[nextLast] = null;
+        size -= 1;
+        if (size < 0){
+            size = 0;
+        }
+        if (items.length >= 16 && size < items.length / 4){
+            resize(items.length / 4);
+        }
         return T;
     }
 
-    /** Returns the item from the back of the list.
-    public Item getLast() {
+    /** Returns the T from the back of the list.
+    public T getLast() {
         return items[size - 1];
     }*/
-    /** Gets the ith item in the list (0 is the front). */
-    public Item get(int i) {
-        if (nextFirst+1+i<= items.length-1){
-            return items[nextFirst+1+i];
-        }
-        else{
-            return items[nextFirst+1+i- items.length];
+    /** Geitems the ith T in the list (0 is the front). */
+    public T get(int i) {
+        if (nextFirst + 1 + i <= items.length-1){
+            return items[nextFirst + 1 + i];
+        } else {
+            return items[nextFirst + 1 + i - items.length];
         }
     }
 
     public static void main(String[] args) {
-        System.out.println("Running tests.\n");
-        ArrayDeque<Integer> s1=new ArrayDeque<>();
+        System.out.println("Running tesitems.\n");
+        ArrayDeque<Integer> s1 = new ArrayDeque<>();
         s1.addLast(11);
         s1.addLast(12);
         s1.addFirst(10);
