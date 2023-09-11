@@ -128,7 +128,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         System.out.println("Running tesitems.\n");
         ArrayDeque<Integer> s1 = new ArrayDeque<>();
         s1.addFirst(11);
@@ -154,5 +154,5 @@ public class ArrayDeque<T> {
         s1.printDeque();
         System.out.println(s1.size());
         System.out.println(s1.get(5));
-    }
+    }*/
 }
