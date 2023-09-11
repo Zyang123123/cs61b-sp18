@@ -17,10 +17,10 @@ public class ArrayDeque<T> {
         T[] a = (T[]) new Object[capacity];
         int i;
         for (i = 0; i < size; i += 1) {
-            if (nextFirst + 1 + i <= size - 1) {
+            if (nextFirst + 1 + i <= items.length - 1) {
                 a[i] = items[nextFirst + 1 + i];
             } else {
-                a[i] = items[nextFirst + 1 + i - size];
+                a[i] = items[nextFirst + 1 + i - items.length];
             }
         }
         //System.arraycopy(items, 0, a, 0, size);
@@ -128,7 +128,7 @@ public class ArrayDeque<T> {
         }
     }
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("Running tesitems.\n");
         ArrayDeque<Integer> s1 = new ArrayDeque<>();
         s1.addFirst(11);
@@ -154,5 +154,5 @@ public class ArrayDeque<T> {
         s1.printDeque();
         System.out.println(s1.size());
         System.out.println(s1.get(5));
-    }*/
+    }
 }
