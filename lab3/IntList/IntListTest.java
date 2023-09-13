@@ -55,6 +55,12 @@ public class IntListTest {
         IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
         assertEquals(exp, IntList.dcatenate(A, B));
         assertEquals(IntList.of(1, 2, 3, 4, 5, 6), A);
+
+        IntList C = IntList.of();
+        IntList D = IntList.of(4, 5, 6);
+        IntList exp2 = IntList.of(4, 5, 6);
+        assertEquals(exp2, IntList.dcatenate(C, D));
+        assertEquals(null, C);//null不可以被操作
     }
 
     @Test
@@ -69,5 +75,17 @@ public class IntListTest {
     /** If you're running this from the command line, you'll need
       * to add a main method. See ArithmeticTest.java for an
       * example. */
+
+    @Test(timeout = 1000)
+    public void testreverse() {
+        IntList B = IntList.of();
+        assertEquals(null, IntList.reverse(B));
+        assertEquals(IntList.of(), B);
+        IntList A = IntList.of(1, 2, 3);
+        IntList exp = IntList.of(3, 2, 1);
+        assertEquals(exp, IntList.reverse(A));
+        assertEquals(IntList.of(1), A);
+
+    }
 
 }
